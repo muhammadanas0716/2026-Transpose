@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Lease Renewal Pipeline</h2>
+    <p>AI-assisted prioritization by expiry urgency with manager approvals.</p>
+  </div>
+  <a class="btn btn-outline" href="/renewals/rera/U-402?lang={{ lang }}">Open RERA engine</a>
+</section>
+
+<section class="kanban four-cols">
+  {% for column, items in buckets.items() %}
+  <article class="kanban-col {% if column == '90+ Days Out' %}green{% elif column == '60-90 Days' %}yellow{% elif column == '30-60 Days' %}orange{% else %}red{% endif %}">
+    <h3>{{ column }}</h3>
+    {% for case in items %}
+    <div class="kanban-card">
+      <h4>{{ case.unit }} - {{ case.tenant_name }}</h4>
+      <p>Current rent: {{ case.current_rent_aed }} AED</p>
+      <p>Expiry: {{ case.expiry_date }}</p>
+      <p><strong>AI Status:</strong> {{ case.ai_status }}</p>
+      <p class="badge badge-ai">✨ AI</p>
+    </div>
+    {% endfor %}
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

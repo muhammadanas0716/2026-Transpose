@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>RERA Rental Index Analysis</h2>
+    <p>Area: {{ renewal.area }}, {{ renewal.bedrooms }} | Current rent: {{ renewal.current_rent_aed }} AED</p>
+  </div>
+  <span class="badge badge-success">🇦🇪 RERA Compliant Workflow</span>
+</section>
+
+<section class="panel">
+  <h3>Dubai Land Department - Rental Index 2026</h3>
+
+  <form id="rera-form" class="rera-form" hx-post="/hx/rera/calculate" hx-target="#rera-result" hx-swap="innerHTML">
+    <input type="hidden" name="unit_id" value="{{ unit_id }}" />
+    <input type="hidden" name="lang" value="{{ lang }}" />
+    <label for="proposed-rent">Proposed rent (AED): <strong id="rent-label">{{ proposed_rent }}</strong></label>
+    <input id="proposed-rent" name="proposed_rent" type="range" min="{{ renewal.current_rent_aed }}" max="{{ renewal.current_rent_aed + 7000 }}" value="{{ proposed_rent }}" hx-trigger="input changed delay:350ms" />
+  </form>
+
+  <div id="rera-result">
+    {% include "partials/rera_result.html" with context %}
+  </div>
+
+  <aside class="recommendation-box">
+    <h4>AI recommendation</h4>
+    <p>Suggested offer: 87,000 AED (competitive, compliant, maximizes ROI).</p>
+    <p class="badge badge-warning">{{ labels.human_gate }}</p>
+  </aside>
+</section>
+{% endblock %}

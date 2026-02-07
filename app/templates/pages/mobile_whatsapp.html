@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="mobile-shell">
+  <h2>Mobile - Tenant WhatsApp Interface</h2>
+  <div class="chat-window whatsapp mobile-only">
+    <div class="bubble tenant ar">المكيف لا يعمل</div>
+    <div class="bubble tenant">AC not working</div>
+    <div class="bubble ai">I've logged your request. Finding an HVAC specialist near Al Barsha...</div>
+    <div class="bubble ai">Technician Ahmad assigned. Arriving at 3:00 PM. Track status: [link]</div>
+    <div class="read-state">Sent ✓ | Delivered ✓✓ | Read ✓✓</div>
+  </div>
+  <nav class="bottom-nav">
+    <a href="/mobile/whatsapp?lang={{ lang }}" class="active">Chat</a>
+    <a href="/mobile/dashboard?lang={{ lang }}">Dashboard</a>
+    <a href="/mobile/ticket/M-1247?lang={{ lang }}">Ticket</a>
+  </nav>
+</section>
+{% endblock %}

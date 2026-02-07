@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="mobile-shell">
+  <h2>Mobile - Property Manager Dashboard</h2>
+  <div class="card-grid two">
+    <article class="metric-card"><h3>Tickets</h3><p>12</p></article>
+    <article class="metric-card"><h3>Renewals</h3><p>8</p></article>
+  </div>
+  <div class="panel" id="mobile-pane" hx-get="/hx/mobile/nav/tickets?lang={{ lang }}" hx-trigger="load" hx-swap="innerHTML"></div>
+  <nav class="bottom-nav js-mobile-nav">
+    <button hx-get="/hx/mobile/nav/tickets?lang={{ lang }}" hx-target="#mobile-pane" hx-swap="innerHTML" class="active">Tickets</button>
+    <button hx-get="/hx/mobile/nav/renewals?lang={{ lang }}" hx-target="#mobile-pane" hx-swap="innerHTML">Renewals</button>
+    <button hx-get="/hx/mobile/nav/ai?lang={{ lang }}" hx-target="#mobile-pane" hx-swap="innerHTML">AI</button>
+  </nav>
+</section>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Homebase Foundations</h2>
+    <p>Style guide, component kit, and system architecture.</p>
+  </div>
+</section>
+
+<section class="split-two">
+  <article class="panel">
+    <h3>Style guide</h3>
+    <div class="color-grid">
+      <div class="color-token" style="background:#1E3A8A">Primary #1E3A8A</div>
+      <div class="color-token" style="background:#F59E0B">Secondary #F59E0B</div>
+      <div class="color-token" style="background:#10B981">Success #10B981</div>
+      <div class="color-token" style="background:#F97316">Warning #F97316</div>
+      <div class="color-token" style="background:#EF4444">Error #EF4444</div>
+      <div class="color-token" style="background:#8B5CF6">AI Accent #8B5CF6</div>
+    </div>
+    <p><strong>Typography:</strong> Poppins headers, SF Pro body, Tajawal Arabic.</p>
+    <div class="component-row">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-outline">Secondary</button>
+      <span class="badge badge-ai">✨ AI</span>
+      <span class="badge badge-success">🇦🇪 RERA Compliant</span>
+    </div>
+  </article>
+
+  <article class="panel">
+    <h3>System architecture diagram</h3>
+    <div class="architecture-grid">
+      <div class="arch-node">Tenant Channels<br/>WhatsApp, App, Email</div>
+      <div class="arch-node core">Homebase AI Agent<br/>Intent + Routing + Policy</div>
+      <div class="arch-node">Property Manager Console<br/>Approve / Override / Audit</div>
+      <div class="arch-node">Maintenance Engine<br/>Tickets + Vendors + SLA</div>
+      <div class="arch-node">Renewal Engine<br/>RERA + Contracts + Ejari</div>
+      <div class="arch-node">Compliance Layer<br/>Emirates ID + Trade License</div>
+      <div class="arch-node">Data Sources<br/>DLD Index + Portfolio Data</div>
+    </div>
+    <p class="note">AI acts as co-pilot. Final commercial/legal decisions stay with managers.</p>
+  </article>
+</section>
+
+<section class="panel">
+  <h3>Post-dated cheque schedule (UAE)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Unit</th><th>Cheque 1</th><th>Cheque 2</th><th>Cheque 3</th><th>Cheque 4</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Unit 402</td>
+          <td>16/04/2026 - 21,750 AED</td>
+          <td>16/07/2026 - 21,750 AED</td>
+          <td>16/10/2026 - 21,750 AED</td>
+          <td>16/01/2027 - 21,750 AED</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

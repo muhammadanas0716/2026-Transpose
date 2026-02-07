@@ -1,0 +1,4 @@
+<div class="status-chip status-{{ agent_state.status.lower() }}">
+  <span class="status-dot"></span>
+  <span>{{ labels.ai_status }}: {{ labels[agent_state.status.lower()] }}</span>
+</div>

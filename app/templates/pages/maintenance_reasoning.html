@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Maintenance Request - Agent Reasoning Panel</h2>
+    <p>AI-assisted analysis for tenant request resolution in Al Barsha.</p>
+  </div>
+  <a class="btn btn-outline" href="/mobile/whatsapp?lang={{ lang }}">Open mobile WhatsApp view</a>
+</section>
+
+<section class="split-two">
+  <article class="panel phone-mockup">
+    <h3>Tenant Initiates (WhatsApp)</h3>
+    <div class="chat-window whatsapp">
+      <div class="bubble tenant ar">المكيف لا يعمل</div>
+      <div class="bubble tenant">AC not working</div>
+      <div class="bubble ai">I've logged your request. Finding an HVAC specialist near Al Barsha...</div>
+      <div class="bubble ai">Technician Ahmad assigned. Arriving at 3:00 PM. Track status: [link]</div>
+      <div class="read-state">Sent ✓ | Delivered ✓✓ | Read ✓✓</div>
+    </div>
+  </article>
+
+  <article class="panel">
+    <h3>Reasoning Flow</h3>
+    <div class="flow-list">
+      {% for icon, ts, text in steps %}
+      <div class="flow-step">
+        <span class="flow-icon">{{ icon }}</span>
+        <div>
+          <p>{{ text }}</p>
+          <time>{{ ts }}</time>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </article>
+</section>
+{% endblock %}

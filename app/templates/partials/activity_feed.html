@@ -1,0 +1,9 @@
+<div class="feed-list">
+  {% for item in items %}
+  <article class="feed-item">
+    <div class="thinking-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <p>{{ item.text }}</p>
+    <time>{{ item.timestamp }}</time>
+  </article>
+  {% endfor %}
+</div>

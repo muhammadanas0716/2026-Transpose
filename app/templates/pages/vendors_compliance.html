@@ -1,0 +1,49 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Vendor Compliance Tracking</h2>
+    <p>License, insurance, Emirates ID verification, and AI-generated score.</p>
+  </div>
+  <span class="badge badge-error">Alert: Vendor ABC's license expires in 15 days</span>
+</section>
+
+<section class="split-two">
+  <article class="panel">
+    <h3>Compliance profile table</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Vendor</th><th>Emirates ID</th><th>Trade License</th><th>Insurance</th><th>AI Score</th><th>Alert</th></tr>
+        </thead>
+        <tbody>
+          {% for row in compliance %}
+          <tr>
+            <td>{{ row.vendor_name }}</td>
+            <td>{{ 'Verified' if row.emirates_id else 'Missing' }}</td>
+            <td>{{ 'Verified' if row.trade_license else 'Missing' }}</td>
+            <td>{{ 'Valid' if row.insurance else 'Expired' }}</td>
+            <td>{{ row.ai_score }}</td>
+            <td>{{ row.alert }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="panel">
+    <h3>Vendor cards</h3>
+    <div class="vendor-grid">
+      {% for vendor in vendors %}
+      <div class="vendor-card">
+        <h4>{{ vendor.name }}</h4>
+        <p>{{ vendor.specialty }} - {{ vendor.area }}</p>
+        <p>License in {{ vendor.license_days_left }} days</p>
+        <p class="badge {{ 'badge-success' if vendor.insurance_valid else 'badge-error' }}">{{ 'Insurance valid' if vendor.insurance_valid else 'Insurance renewal required' }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </article>
+</section>
+{% endblock %}

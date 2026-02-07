@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Ticket Tracking</h2>
+    <p>#{{ ticket.ticket_id }} - {{ ticket.title }} - {{ ticket.unit }}, {{ ticket.area }}</p>
+  </div>
+  <span class="badge badge-warning">{{ labels.human_gate }}</span>
+</section>
+
+<section class="panel">
+  <div class="ticket-detail-grid">
+    <div>
+      <h3>Ticket summary</h3>
+      <p><strong>Tenant:</strong> {{ ticket.tenant_name }}</p>
+      <p><strong>Vendor:</strong> {{ ticket.vendor_name }}</p>
+      <p><strong>AI notes:</strong> {{ ticket.notes }}</p>
+    </div>
+    <div>
+      <h3>SLA</h3>
+      <p class="sla-text">1h 23m remaining</p>
+      <p class="badge badge-ai">✨ AI Priority: {{ ticket.priority }}</p>
+    </div>
+  </div>
+
+  <div id="ticket-timeline" hx-get="/hx/tickets/{{ ticket.ticket_id }}/timeline?lang={{ lang }}" hx-trigger="load, every 5s" hx-swap="innerHTML">
+    {% include "partials/ticket_timeline.html" with context %}
+  </div>
+</section>
+{% endblock %}

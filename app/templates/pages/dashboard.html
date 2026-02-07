@@ -1,0 +1,72 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Homebase AI Agent</h2>
+    <p>{{ labels.ai_assisted }} | {{ labels.response }} | {{ labels.freshness }}</p>
+  </div>
+  <div class="badges-row">
+    <span class="badge badge-ai">✨ AI</span>
+    <span class="badge badge-success">{{ labels.rera_badge }}</span>
+    <span class="badge badge-warning">{{ labels.saved_time }}</span>
+  </div>
+</section>
+
+<section class="card-grid four">
+  <article class="metric-card">
+    <h3>Active tickets</h3>
+    <p>{{ active_tickets }}</p>
+  </article>
+  <article class="metric-card">
+    <h3>Pending renewals</h3>
+    <p>{{ pending_renewals }}</p>
+    <small>{{ renewal_countdown_days }} days to deadline</small>
+  </article>
+  <article class="metric-card">
+    <h3>Agent actions today</h3>
+    <p>{{ actions_today }}</p>
+  </article>
+  <article class="metric-card">
+    <h3>Response time</h3>
+    <p>{{ response_time }} seconds avg</p>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h3>Real-time AI activity feed</h3>
+    <span class="pill">{{ labels.demo_mode }}</span>
+  </div>
+  <div id="activity-feed" hx-get="/hx/agent/activity-feed?lang={{ lang }}" hx-trigger="load, every 5s" hx-swap="innerHTML">
+    {% include "partials/activity_feed.html" with context %}
+  </div>
+</section>
+
+<section class="split-two">
+  <article class="panel">
+    <div class="panel-head">
+      <h3>Maintenance pipeline</h3>
+      <a class="text-link" href="/maintenance/vendors?lang={{ lang }}">Open flow</a>
+    </div>
+    <div class="pipeline-line">
+      {% for stage in maintenance_pipeline %}
+      <span class="pipeline-step">{{ stage }}</span>
+      {% endfor %}
+    </div>
+    <p class="note">Human checkpoint: dispatch confirmation by property manager.</p>
+  </article>
+
+  <article class="panel">
+    <div class="panel-head">
+      <h3>Renewal pipeline</h3>
+      <a class="text-link" href="/renewals/pipeline?lang={{ lang }}">Open flow</a>
+    </div>
+    <div class="pipeline-line renewal">
+      {% for stage in renewal_pipeline %}
+      <span class="pipeline-step">{{ stage }}</span>
+      {% endfor %}
+    </div>
+    <p class="note">Human checkpoint: manager approves terms before tenant send.</p>
+  </article>
+</section>
+{% endblock %}

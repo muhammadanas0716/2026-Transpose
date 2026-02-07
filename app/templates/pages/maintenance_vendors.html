@@ -1,0 +1,53 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Vendor Assignment Dashboard</h2>
+    <p>Drag a vendor card onto the ticket lane for AI-assisted dispatch.</p>
+  </div>
+  <span class="badge badge-ai">✨ AI Recommended appears on selected vendor</span>
+</section>
+
+<section class="split-two">
+  <article class="panel">
+    <h3>Vendor marketplace</h3>
+    <div class="vendor-grid">
+      {% for vendor in vendors %}
+      <div class="vendor-card" draggable="true" data-vendor-id="{{ vendor.vendor_id }}">
+        <div class="vendor-head">
+          <h4>{{ vendor.name }}</h4>
+          <span class="dot {{ vendor.availability }}"></span>
+        </div>
+        <p>{{ vendor.specialty }} | {{ vendor.area }}</p>
+        <p>Response: {{ vendor.response_minutes }}m | Rating: {{ vendor.rating }} | Jobs: {{ vendor.jobs_completed }}</p>
+        {% if vendor.ai_recommended %}<span class="badge badge-ai">✨ AI Recommended</span>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </article>
+
+  <article class="panel">
+    <h3>Assignment lanes + map</h3>
+    <div id="ticket-lane-{{ ticket.ticket_id }}" class="ticket-dropzone" data-ticket-id="{{ ticket.ticket_id }}">
+      <h4>{{ ticket.ticket_id }} - {{ ticket.title }} ({{ ticket.unit }})</h4>
+      <p>Current assignee: {{ ticket.vendor_name }}</p>
+      <p>SLA target: 2h response window</p>
+    </div>
+
+    <div class="map-box">
+      <h4>Dubai map view (mock)</h4>
+      <div class="map-row"><span>Al Barsha</span><span>📍 Ahmad HVAC</span></div>
+      <div class="map-row"><span>Dubai Marina</span><span>📍 Marina Plumbers</span></div>
+      <div class="map-row"><span>JBR</span><span>📍 JBR Electric</span></div>
+    </div>
+
+    <div id="assignment-result"></div>
+
+    <form id="vendor-assignment-form" hx-post="/hx/vendors/assign" hx-target="#assignment-result" hx-swap="innerHTML">
+      <input type="hidden" name="ticket_id" id="assign-ticket-id" value="{{ ticket.ticket_id }}" />
+      <input type="hidden" name="vendor_id" id="assign-vendor-id" value="" />
+      <input type="hidden" name="lang" value="{{ lang }}" />
+    </form>
+  </article>
+</section>
+{% endblock %}

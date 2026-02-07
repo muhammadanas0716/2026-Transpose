@@ -1,0 +1,34 @@
+<div class="rera-grid">
+  <div class="stat-card">
+    <h4>Current rent</h4>
+    <p>{{ analysis.current_rent_aed }} AED</p>
+  </div>
+  <div class="stat-card">
+    <h4>Market average</h4>
+    <p>{{ analysis.market_average_aed }} AED</p>
+  </div>
+  <div class="stat-card">
+    <h4>Your offer vs market</h4>
+    <p>{{ analysis.your_vs_market_pct }}%</p>
+  </div>
+  <div class="stat-card">
+    <h4>RERA max increase</h4>
+    <p>{{ analysis.max_allowed_increase_pct }}%</p>
+  </div>
+  <div class="stat-card emphasis">
+    <h4>Proposed renewal</h4>
+    <p>{{ proposed_rent }} AED</p>
+  </div>
+  <div class="stat-card">
+    <h4>AI recommendation</h4>
+    <p>{{ analysis.recommended_rent_aed }} AED</p>
+  </div>
+</div>
+<p class="compliance-pill {{ 'ok' if analysis.compliant else 'bad' }}">
+  {% if analysis.compliant %}
+  🇦🇪 RERA Compliant - within allowed range
+  {% else %}
+  Not compliant - exceeds RERA maximum increase
+  {% endif %}
+</p>
+<p class="source-text">Updated: {{ analysis.updated_at }} | Source: {{ analysis.source }}</p>

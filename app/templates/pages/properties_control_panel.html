@@ -1,0 +1,49 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Property Manager Control Panel</h2>
+    <p>Portfolio overview (~50 units) with AI-assisted bulk operations.</p>
+  </div>
+  <div class="actions-row compact">
+    <button class="btn btn-primary" hx-post="/hx/renewals/bulk-process" hx-confirm="Process all renewals now?" hx-target="#bulk-feedback" hx-swap="innerHTML">{{ labels.process_all }}</button>
+    <button class="btn btn-outline" hx-post="/hx/renewals/send-notices" hx-confirm="Send 90-day notices now?" hx-target="#bulk-feedback" hx-swap="innerHTML">{{ labels.notices }}</button>
+  </div>
+</section>
+
+<section class="card-grid three">
+  <article class="metric-card"><h3>Time saved this month</h3><p>47 hours</p></article>
+  <article class="metric-card"><h3>Auto-resolved tickets</h3><p>89%</p></article>
+  <article class="metric-card"><h3>Renewal completion rate</h3><p>94%</p></article>
+</section>
+
+<div id="bulk-feedback"></div>
+
+<section class="panel">
+  <div class="panel-head">
+    <h3>Unit directory</h3>
+    <div class="filter-row">
+      <span class="pill">Building filter</span>
+      <span class="pill">Status filter</span>
+      <span class="pill">Renewal timeline filter</span>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Unit</th><th>Building</th><th>Status</th><th>Renewal timeline</th></tr>
+      </thead>
+      <tbody>
+        {% for unit in units %}
+        <tr>
+          <td>{{ unit.unit }}</td>
+          <td>{{ unit.building }}</td>
+          <td>{{ unit.status }}</td>
+          <td>{{ unit.renewal_timeline }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

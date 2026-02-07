@@ -1,0 +1,9 @@
+<div class="timeline-track">
+  {% for status in ticket.statuses %}
+  <div class="timeline-step {% if loop.index0 <= ticket.status_index %}done{% endif %}">
+    <span class="timeline-dot"></span>
+    <span>{{ status }}</span>
+  </div>
+  {% endfor %}
+</div>
+<p class="sla-text">SLA countdown: <strong>{{ (ticket.sla_minutes_remaining // 60) }}h {{ (ticket.sla_minutes_remaining % 60) }}m remaining</strong></p>

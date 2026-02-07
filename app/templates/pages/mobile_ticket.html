@@ -1,0 +1,19 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="mobile-shell">
+  <h2>Mobile - Ticket Status</h2>
+  <article class="panel">
+    <h3>{{ ticket.ticket_id }} - {{ ticket.title }}</h3>
+    <p>{{ ticket.unit }}, {{ ticket.area }}</p>
+    <p>Vendor: {{ ticket.vendor_name }}</p>
+    <div id="ticket-timeline" hx-get="/hx/tickets/{{ ticket.ticket_id }}/timeline?lang={{ lang }}" hx-trigger="load, every 5s" hx-swap="innerHTML">
+      {% include "partials/ticket_timeline.html" with context %}
+    </div>
+  </article>
+  <nav class="bottom-nav">
+    <a href="/mobile/whatsapp?lang={{ lang }}">Chat</a>
+    <a href="/mobile/dashboard?lang={{ lang }}">Dashboard</a>
+    <a href="/mobile/ticket/{{ ticket.ticket_id }}?lang={{ lang }}" class="active">Ticket</a>
+  </nav>
+</section>
+{% endblock %}

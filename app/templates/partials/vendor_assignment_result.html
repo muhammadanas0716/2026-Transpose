@@ -1,0 +1,8 @@
+<div class="toast success">
+  Assigned <strong>{{ vendor.name }}</strong> to ticket <strong>{{ ticket.ticket_id }}</strong>. Manager can override before dispatch.
+</div>
+<div id="ticket-lane-{{ ticket.ticket_id }}" hx-swap-oob="innerHTML" class="ticket-dropzone ready">
+  <h4>{{ ticket.ticket_id }} - {{ ticket.title }} ({{ ticket.unit }})</h4>
+  <p>Current assignee: {{ ticket.vendor_name }}</p>
+  <p class="badge badge-ai">✨ AI Recommended</p>
+</div>

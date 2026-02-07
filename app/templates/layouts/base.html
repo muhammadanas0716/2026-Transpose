@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="{{ lang }}" dir="{{ dir }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ labels.app_name }} | {{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/app.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  </head>
+  <body class="app-shell {{ 'arabic' if lang == 'ar' else 'english' }}">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <div class="ai-pulse" aria-hidden="true"></div>
+        <div>
+          <h1 class="brand-title">{{ labels.app_name }}</h1>
+          <p class="brand-subtitle">{{ labels.tagline }}</p>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        {% for item in nav_items %}
+        <a href="{{ item.href }}" class="nav-link {% if nav_active == item.key %}active{% endif %}">{{ item.title }}</a>
+        {% endfor %}
+      </nav>
+
+      <div class="topbar-actions">
+        <div id="agent-status-chip" hx-get="/hx/agent/status?lang={{ lang }}" hx-trigger="load, every 5s" hx-swap="innerHTML">
+          {% include "partials/agent_status_chip.html" %}
+        </div>
+        <div class="badge badge-ai">✨ AI</div>
+        <form hx-post="/hx/lang/toggle" hx-swap="none">
+          <input type="hidden" name="lang" value="{{ 'ar' if lang == 'en' else 'en' }}" />
+          <button type="submit" class="btn btn-outline">{{ labels.lang_switch }}</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="content-wrap">
+      {% block content %}{% endblock %}
+    </main>
+
+    <script>
+      window.APP_LANG = "{{ lang }}";
+      window.APP_DIR = "{{ dir }}";
+    </script>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

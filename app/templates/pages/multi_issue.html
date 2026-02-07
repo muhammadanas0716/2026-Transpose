@@ -1,0 +1,46 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <h2>Multi-Issue Agent Intelligence</h2>
+    <p>Input: "AC broken, lease ends in 60 days, need to discuss security deposit"</p>
+  </div>
+  <span class="badge badge-warning">Parallel orchestration in 15 seconds</span>
+</section>
+
+<section class="split-two">
+  <article class="panel">
+    <h3>Reasoning map</h3>
+    <div class="mind-map">
+      <div class="mind-center">Complex request detected</div>
+      <div class="mind-branch urgent">
+        <h4>URGENT: Maintenance (AC)</h4>
+        <p>Find vendor, assign, notify</p>
+      </div>
+      <div class="mind-branch warning">
+        <h4>TIME-SENSITIVE: Renewal</h4>
+        <p>Check RERA, calculate offer, generate contract</p>
+      </div>
+      <div class="mind-branch neutral">
+        <h4>ADMIN: Security deposit query</h4>
+        <p>Pull move-in report, check refund status</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="panel">
+    <h3>Parallel execution timeline</h3>
+    <ul class="simple-list">
+      <li>0-5s: All three workflows initiated</li>
+      <li>5-10s: Vendor assigned, RERA checked, deposit record found</li>
+      <li>10-15s: Single unified response sent to tenant</li>
+    </ul>
+
+    <div class="final-message">
+      <h4>Unified AI message</h4>
+      <p>We've assigned Ahmad HVAC for your AC (arrival 3:00 PM), prepared your compliant renewal offer at 87,000 AED, and retrieved your deposit record. Your refund review status is available and can be discussed in one call.</p>
+      <p class="note">Manager can approve or edit this response before sending.</p>
+    </div>
+  </article>
+</section>
+{% endblock %}
